@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="fill-tasks-table.xml.1" author="ani">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tasks"/>
+        </preConditions>
+
+        <insert tableName="tasks">
+            <column name="name">Писать статью</column>
+            <column name="description">описание задачи</column>
+            <column name="status">COMPLETED</column>
+            <column name="creation_date">2023.05.01</column>
+            <column name="update_date">2023.05.10</column>
+            <column name="user_id">1</column>
+            <column name="label_id">1</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="name">Подобрать темы и материал для каждой статьи</column>
+            <column name="description">описание задачи</column>
+            <column name="status">IN_PROGRESS</column>
+            <column name="creation_date">2023.05.05</column>
+            <column name="update_date">2023.05.10</column>
+            <column name="user_id">1</column>
+            <column name="label_id">2</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="name">Отредактировать написанные работы</column>
+            <column name="description">описание задачи</column>
+            <column name="status">IN_PROGRESS</column>
+            <column name="creation_date">2023.05.10</column>
+            <column name="update_date">2023.05.15</column>
+            <column name="user_id">1</column>
+            <column name="label_id">3</column>
+        </insert>
+        <insert tableName="tasks">
+            <column name="name">Выложить статьи на сайт</column>
+            <column name="description">описание задачи</column>
+            <column name="status">NEW</column>
+            <column name="creation_date">2023.05.20</column>
+            <column name="user_id">1</column>
+            <column name="label_id">4</column>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
