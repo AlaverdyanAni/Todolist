@@ -8,6 +8,8 @@ import pro.sky.todolist.mapper.LabelMapper;
 import pro.sky.todolist.model.Label;
 import pro.sky.todolist.repository.LabelRepository;
 
+import java.util.Optional;
+
 import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 
 @Service
@@ -20,13 +22,14 @@ public class LabelService {
     }
 
     public LabelDto create(LabelDto labelDto) {
-        String name = labelDto.getName();
-        if (labelRepository.findByName(name).isPresent()) {
-            throw new LabelIsPresentException(name);
+        Optional<Label> label = labelRepository.findByName(labelDto.getName());
+        if (label.isPresent()) {
+            throw new LabelIsPresentException(labelDto.getName());
+        } else {
+            labelRepository.save(labelMapper.toEntity(labelDto));
+            return labelMapper.toDto(label.get());
         }
-        return labelMapper.toDto(labelRepository.save(labelMapper.toEntity(labelDto)));
-        }
-
+    }
 
     public LabelDto read(long id) {
         return labelMapper.toDto(

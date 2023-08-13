@@ -23,8 +23,8 @@ public class LabelController {
     @Operation(summary = "Добавление категории")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "201", description = "Категория успешно добавлен"),
-                    @ApiResponse(responseCode = "400", description = "Название категории пустое"),
+                    @ApiResponse(responseCode = "201", description = "Категория успешно добавлена"),
+                    @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
                     @ApiResponse(responseCode = "409", description = "Категория с таким названием уже есть в БД"),
             }
     )
@@ -38,8 +38,8 @@ public class LabelController {
     @Operation(summary = "Получение категории по id")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Категория успешно найден"),
-                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найден"),
+                    @ApiResponse(responseCode = "200", description = "Категория успешно найдена"),
+                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найдена"),
             }
     )
     @GetMapping("/{id}")
@@ -50,9 +50,9 @@ public class LabelController {
     @Operation(summary = "Обновление категории по id")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Категория успешно обновлён"),
-                    @ApiResponse(responseCode = "400", description = "Название категории пустое"),
-                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найден"),
+                    @ApiResponse(responseCode = "200", description = "Категория успешно обновлена"),
+                    @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
+                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найдена"),
             }
     )
     @PutMapping("/{id}")
@@ -63,8 +63,8 @@ public class LabelController {
     @Operation(summary = "Удаление категории по id")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Категория успешно удалён"),
-                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найден"),
+                    @ApiResponse(responseCode = "200", description = "Категория успешно удалена"),
+                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найдена"),
             }
     )
     @DeleteMapping("/{id}")

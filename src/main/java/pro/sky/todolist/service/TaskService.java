@@ -43,8 +43,7 @@ public class TaskService {
     public TaskDtoOut read(long id) {
         return taskMapper.toDto(
                 taskRepository.findById(id)
-                        .orElseThrow(() -> new TaskNotFoundException(id))
-        );
+                        .orElseThrow(() -> new TaskNotFoundException(id)));
     }
 
     @Transactional

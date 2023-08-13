@@ -22,7 +22,8 @@ public class UserController {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "201", description = "Пользователь успешно добавлен"),
-                    @ApiResponse(responseCode = "400", description = "Невалидное поле в DTO")
+                    @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
+                    @ApiResponse(responseCode = "409", description = "Пользователь с таким названием уже есть в БД"),
             }
     )
     @PostMapping
@@ -47,7 +48,7 @@ public class UserController {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Пользователь успешно обновлён"),
-                    @ApiResponse(responseCode = "400", description = "Невалидное поле в DTO"),
+                    @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
                     @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден"),
             }
     )

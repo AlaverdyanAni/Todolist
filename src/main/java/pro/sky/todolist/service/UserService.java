@@ -2,11 +2,15 @@ package pro.sky.todolist.service;
 
 import org.springframework.stereotype.Service;
 import pro.sky.todolist.dto.UserDto;
+import pro.sky.todolist.exception.LabelIsPresentException;
+import pro.sky.todolist.exception.UserIsPresentException;
 import pro.sky.todolist.exception.UserNotFoundException;
 import pro.sky.todolist.mapper.UserMapper;
+import pro.sky.todolist.model.Label;
 import pro.sky.todolist.model.User;
 import pro.sky.todolist.repository.UserRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,20 +23,23 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public UserDto create(UserDto userDto) {
+    public UserDto create1(UserDto userDto) {
         return userMapper.toDto(
                 userRepository.save(
-                        userMapper.toEntity(userDto)
-                )
-        );
+                        userMapper.toEntity(userDto)));
     }
-
+    public UserDto create(UserDto userDto) {
+        Optional<User> user=userRepository.findByEmail(userDto.getEmail());
+        if(!user.isPresent()){
+            throw  new UserIsPresentException(userDto.getEmail());
+        }else userRepository.save(userMapper.toEntity(userDto));
+        return userMapper.toDto(user.get());
+    }
 
     public UserDto read(long id) {
         return userMapper.toDto(
                 userRepository.findById(id)
-                        .orElseThrow(() -> new UserNotFoundException(id))
-        );
+                        .orElseThrow(() -> new UserNotFoundException(id)));
     }
 
     public UserDto update(long id, UserDto userDto) {
@@ -53,6 +60,5 @@ public class UserService {
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
-
 }
 

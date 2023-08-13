@@ -27,7 +27,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "201", description = "Задача успешно добавлена"),
-                        @ApiResponse(responseCode = "400", description = "Невалидное поле в DTO"),
+                        @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
                         @ApiResponse(responseCode = "404", description = "Задача не найдена по id"),
                 }
         )
@@ -41,7 +41,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задача успешно обновлена"),
-                        @ApiResponse(responseCode = "400", description = "Невалидное поле в DTO"),
+                        @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
                         @ApiResponse(responseCode = "404", description = "Задача не найдена по id"),
                 }
         )
@@ -78,7 +78,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задача успешно найдены"),
-                        @ApiResponse(responseCode = "400", description = "Некорректные параметры")
+                        @ApiResponse(responseCode = "400", description = "Невалидное поле!")
                 }
         )
         @GetMapping
