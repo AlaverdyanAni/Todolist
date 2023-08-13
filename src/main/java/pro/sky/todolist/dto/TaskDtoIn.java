@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import pro.sky.todolist.annotation.ValueOfEnum;
 import pro.sky.todolist.model.Status;
 
 @Getter
@@ -25,7 +26,7 @@ public class TaskDtoIn {
 
     @Schema(name = "status", description = "Статус", example = "NEW, IN_PROGRESS, COMPLETED")
     @NotNull
-   // @ValueOfEnum(enumClass = CustomerType.class)
+    @ValueOfEnum(enumClass = Status.class, message = "Invalid Status")
     private Status status;
 
     @Schema(name = "userId", description = "Имя пользователя",minimum = "1", example = "1")
