@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.todolist.dto.LabelDto;
+import pro.sky.todolist.dto.UserDto;
 import pro.sky.todolist.service.LabelService;
 
 @RestController
@@ -65,6 +66,7 @@ public class LabelController {
             value = {
                     @ApiResponse(responseCode = "200", description = "Категория успешно удалена"),
                     @ApiResponse(responseCode = "404", description = "Категория с таким id не найдена!"),
+                    @ApiResponse(responseCode = "409", description = "По данной категории есть задачи!"),
             }
     )
     @DeleteMapping("/{id}")

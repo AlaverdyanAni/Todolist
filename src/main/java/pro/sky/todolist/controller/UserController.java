@@ -62,6 +62,7 @@ public class UserController {
             value = {
                     @ApiResponse(responseCode = "200", description = "Пользователь успешно удалён"),
                     @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден"),
+                    @ApiResponse(responseCode = "409", description = "У данного пользователя есть задачи"),
             }
     )
     @DeleteMapping("/{id}")

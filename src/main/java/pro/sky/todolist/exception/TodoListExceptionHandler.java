@@ -30,7 +30,9 @@ public class TodoListExceptionHandler {
     }
     @ExceptionHandler({
             UserIsPresentException.class,
-            LabelIsPresentException.class
+            LabelIsPresentException.class,
+            UserHasTasksException.class,
+            LabelHasTasksException.class
     })
     public ResponseEntity<String> handleIsPresentException(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());

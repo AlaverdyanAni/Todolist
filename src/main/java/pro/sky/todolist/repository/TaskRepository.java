@@ -11,4 +11,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findTasksByUserId(Long id);
     @Query(value = "SELECT t.* FROM tasks t  WHERE t.user_id=?1 and t.label_id=?2", nativeQuery = true)
     List <Task> findTasksByUserIdAndLabelId(Long userId, Long labelId);
+    @Query(value = "SELECT t.* FROM tasks t  WHERE t.label_id=?1", nativeQuery = true)
+    List <Task> findTasksByLabelId(Long labelId);
 }
