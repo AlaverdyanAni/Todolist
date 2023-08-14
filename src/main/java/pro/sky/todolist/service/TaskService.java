@@ -36,6 +36,13 @@ public class TaskService {
 
     @Transactional
     public TaskDtoOut create(TaskDtoIn taskDtoIn) {
+        long userId = taskDtoIn.getUserId();
+        long labelId = taskDtoIn.getLabelId();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        Label label = labelRepository.findById(labelId)
+                .orElseThrow(()-> new LabelNotFoundException(labelId));
+
         Task task = taskMapper.toEntity(taskDtoIn);
         task.setCreationDate(LocalDate.now());
         return taskMapper.toDto(taskRepository.save(task));

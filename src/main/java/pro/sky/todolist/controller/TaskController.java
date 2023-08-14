@@ -27,7 +27,7 @@ public class TaskController {
                 value = {
                         @ApiResponse(responseCode = "201", description = "Задача успешно добавлена"),
                         @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
-                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена!"),
+                        @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден! или Категория с таким id не найдена!"),
                 }
         )
         @PostMapping
@@ -89,7 +89,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задачи успешно найдены"),
-                        @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден!")
+                        @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден! или Категория с таким id не найдена! или Задачи у пользователя с таким id не найдены!")
                 }
         )
         @GetMapping("/all/by-userId-labelId")

@@ -21,17 +21,17 @@ public class TaskDtoIn {
     @Size(max = 120)
     private String description;
 
-    @Schema(name = "status", description = "Статус", example = "NEW, IN_PROGRESS, COMPLETED")
+    @Schema(name = "status", description = "Статус", example = "NEW")
     @NotNull
-    @ValueOfEnum(enumClass = Status.class, message = "Invalid Status")
+   // @ValueOfEnum(enumClass = Status.class, message = "Invalid Status")
     private Status status;
 
-    @Schema(name = "userId", description = "Имя пользователя",minimum = "1", example = "1")
+    @Schema(name = "userId", description = "Id пользователя", minimum = "1", example = "1")
     @NotNull
     @Positive
     private long userId;
 
-    @Schema(name = "labelId", description = "Название категории", minimum = "1", example = "1")
+    @Schema(name = "labelId", description = "Id категории", minimum = "1", example = "1")
     @NotNull
     @Positive
     private long labelId;

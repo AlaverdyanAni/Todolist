@@ -52,7 +52,7 @@ public class LabelController {
             value = {
                     @ApiResponse(responseCode = "200", description = "Категория успешно обновлена"),
                     @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
-                    @ApiResponse(responseCode = "404", description = "Категория с таким id не найдена!"),
+                    @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден! или Задачи у пользователя с таким id не найдены!"),
             }
     )
     @PutMapping("/{id}")
