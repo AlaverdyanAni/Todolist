@@ -1,6 +1,5 @@
 package pro.sky.todolist.service;
 
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pro.sky.todolist.dto.TaskDtoIn;
@@ -13,9 +12,7 @@ import pro.sky.todolist.model.User;
 import pro.sky.todolist.repository.LabelRepository;
 import pro.sky.todolist.repository.TaskRepository;
 import pro.sky.todolist.repository.UserRepository;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +41,8 @@ public class TaskService {
                 .orElseThrow(()-> new LabelNotFoundException(labelId));
 
         Task task = taskMapper.toEntity(taskDtoIn);
+        task.setUser(user);
+        task.setLabel(label);
         task.setCreationDate(LocalDate.now());
         return taskMapper.toDto(taskRepository.save(task));
     }
@@ -57,9 +56,17 @@ public class TaskService {
 
     @Transactional
     public TaskDtoOut update(long id, TaskDtoIn taskDtoIn) {
+        long userId = taskDtoIn.getUserId();
+        long labelId = taskDtoIn.getLabelId();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        Label label = labelRepository.findById(labelId)
+                .orElseThrow(()-> new LabelNotFoundException(labelId));
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
         taskMapper.enrichTask(taskDtoIn,task);
+        task.setUser(user);
+        task.setLabel(label);
         task.setUpdateDate(LocalDate.now());
         return taskMapper.toDto(taskRepository.save(task));
     }

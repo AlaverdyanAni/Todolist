@@ -2,21 +2,17 @@ package pro.sky.todolist.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import pro.sky.todolist.dto.LabelDto;
 import pro.sky.todolist.dto.UserDto;
-import pro.sky.todolist.exception.LabelIsPresentException;
 import pro.sky.todolist.exception.UserHasTasksException;
 import pro.sky.todolist.exception.UserIsPresentException;
 import pro.sky.todolist.exception.UserNotFoundException;
 import pro.sky.todolist.mapper.UserMapper;
-import pro.sky.todolist.model.Label;
 import pro.sky.todolist.model.Task;
 import pro.sky.todolist.model.User;
 import pro.sky.todolist.repository.TaskRepository;
 import pro.sky.todolist.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 
