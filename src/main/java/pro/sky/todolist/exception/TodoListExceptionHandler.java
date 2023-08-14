@@ -21,6 +21,7 @@ public class TodoListExceptionHandler {
 
     @ExceptionHandler({
             UserNotFoundException.class,
+            UserTasksNotFoundException.class,
             TaskNotFoundException.class,
             LabelNotFoundException.class
     })

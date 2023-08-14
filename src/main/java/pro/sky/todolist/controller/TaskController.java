@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.todolist.dto.TaskDtoIn;
 import pro.sky.todolist.dto.TaskDtoOut;
 import pro.sky.todolist.service.TaskService;
-
 import java.util.List;
 
 @RestController
@@ -28,7 +27,7 @@ public class TaskController {
                 value = {
                         @ApiResponse(responseCode = "201", description = "Задача успешно добавлена"),
                         @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
-                        @ApiResponse(responseCode = "404", description = "Задача не найдена по id"),
+                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена!"),
                 }
         )
         @PostMapping
@@ -42,7 +41,7 @@ public class TaskController {
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задача успешно обновлена"),
                         @ApiResponse(responseCode = "400", description = "Невалидное поле!"),
-                        @ApiResponse(responseCode = "404", description = "Задача не найдена по id"),
+                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена!"),
                 }
         )
         @PutMapping("/{id}")
@@ -55,7 +54,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задача успешно найдена"),
-                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена"),
+                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена!"),
                 }
         )
         @GetMapping("/{id}")
@@ -66,7 +65,7 @@ public class TaskController {
         @ApiResponses(
                 value = {
                         @ApiResponse(responseCode = "200", description = "Задача успешно удалена"),
-                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена"),
+                        @ApiResponse(responseCode = "404", description = "Задача с таким id не найдена!"),
                 }
         )
         @DeleteMapping("/{id}")
@@ -74,18 +73,30 @@ public class TaskController {
             return taskService.delete(id);
         }
 
-        @Operation(summary = "Получение списка задач по параметрам")
+        @Operation(summary = "Получение списка задач по id пользователя")
         @ApiResponses(
                 value = {
-                        @ApiResponse(responseCode = "200", description = "Задача успешно найдены"),
-                        @ApiResponse(responseCode = "400", description = "Невалидное поле!")
-                }
+                        @ApiResponse(responseCode = "200", description = "Задачаи успешно найдены"),
+                        @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден! или Задачи у пользователя с таким id не найдены!"),
+                                }
         )
-        @GetMapping
+        @GetMapping("/all/by-userId")
         public List<TaskDtoOut> getUserAllTasks(@RequestParam long userId) {
                 return taskService.userAllTasks(userId);
         }
 
+        @Operation(summary = "Получение списка задач по id пользователя и id категории")
+        @ApiResponses(
+                value = {
+                        @ApiResponse(responseCode = "200", description = "Задачи успешно найдены"),
+                        @ApiResponse(responseCode = "404", description = "Пользователь с таким id не найден!")
+                }
+        )
+        @GetMapping("/all/by-userId-labelId")
+        public List<TaskDtoOut> getUserAllTasksByLabel(@RequestParam long userId,
+                                                       @RequestParam long labelId) {
+                return taskService.userAllTasksByLabel(userId, labelId);
+        }
+}
 
-    }
 

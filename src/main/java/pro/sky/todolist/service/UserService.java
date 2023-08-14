@@ -1,6 +1,8 @@
 package pro.sky.todolist.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import pro.sky.todolist.dto.LabelDto;
 import pro.sky.todolist.dto.UserDto;
 import pro.sky.todolist.exception.LabelIsPresentException;
 import pro.sky.todolist.exception.UserIsPresentException;
@@ -22,32 +24,32 @@ public class UserService {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
-
-    public UserDto create1(UserDto userDto) {
-        return userMapper.toDto(
-                userRepository.save(
-                        userMapper.toEntity(userDto)));
-    }
+    @Transactional
     public UserDto create(UserDto userDto) {
-        Optional<User> user=userRepository.findByEmail(userDto.getEmail());
-        if(!user.isPresent()){
-            throw  new UserIsPresentException(userDto.getEmail());
-        }else userRepository.save(userMapper.toEntity(userDto));
-        return userMapper.toDto(user.get());
+        Optional<User> user = userRepository.findByEmail(userDto.getEmail());
+        if (user.isPresent()) {
+            throw new UserIsPresentException(userDto.getEmail());
+        } else {
+            User createdUser = userRepository.save(userMapper.toEntity(userDto));
+            return userMapper.toDto(createdUser);
+        }
     }
 
+    @Transactional
     public UserDto read(long id) {
         return userMapper.toDto(
                 userRepository.findById(id)
                         .orElseThrow(() -> new UserNotFoundException(id)));
     }
 
+    @Transactional
     public UserDto update(long id, UserDto userDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         userMapper.enrichUser(userDto, user);
         return userMapper.toDto(userRepository.save(user));
     }
 
+    @Transactional
     public UserDto delete(long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
@@ -55,10 +57,5 @@ public class UserService {
         return userMapper.toDto(user);
     }
 
-    public List<UserDto> list() {
-        return userRepository.findAll().stream()
-                .map(userMapper::toDto)
-                .collect(Collectors.toList());
-    }
 }
 

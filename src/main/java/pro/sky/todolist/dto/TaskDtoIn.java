@@ -11,9 +11,6 @@ import pro.sky.todolist.model.Status;
 @Setter
 public class TaskDtoIn {
 
-    @Schema(name = "id", description = "id задачи")
-    private Long id;
-
     @Schema(name = "name", description = "Название", maxLength = 50, example = "Писать статью")
     @NotBlank
     @Size(max = 50)
@@ -30,12 +27,12 @@ public class TaskDtoIn {
     private Status status;
 
     @Schema(name = "userId", description = "Имя пользователя",minimum = "1", example = "1")
-    @NotBlank
+    @NotNull
     @Positive
     private long userId;
 
     @Schema(name = "labelId", description = "Название категории", minimum = "1", example = "1")
-    @NotBlank
+    @NotNull
     @Positive
     private long labelId;
 }

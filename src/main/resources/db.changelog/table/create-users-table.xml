@@ -19,7 +19,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(30)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>

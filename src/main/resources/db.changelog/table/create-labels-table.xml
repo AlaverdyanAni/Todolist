@@ -16,7 +16,7 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>

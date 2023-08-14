@@ -9,7 +9,7 @@ public class TaskNotFoundException extends RuntimeException{
 
     @Override
     public String getMessage() {
-        return "Task с id = " + id + " не найдена!";
+        return "Задача с id = " + id + " не найдена!";
     }
 
 }
