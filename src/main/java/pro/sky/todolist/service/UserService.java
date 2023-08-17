@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class UserService {
     private final UserRepository userRepository;
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
     private final UserMapper userMapper;
 
     public UserService(UserRepository userRepository, TaskRepository taskRepository, UserMapper userMapper) {
@@ -56,11 +56,12 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         List<Task> tasks = taskRepository.findTasksByUserId(id);
-        if (!tasks.isEmpty()){
+        if (!tasks.isEmpty()) {
             throw new UserHasTasksException(id);
-        }else
-        userRepository.delete(user);
-        return userMapper.toDto(user);
+        } else {
+            userRepository.delete(user);
+            return userMapper.toDto(user);
+        }
     }
 
 }

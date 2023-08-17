@@ -53,10 +53,10 @@ public class LabelService {
                 .orElseThrow(() -> new LabelNotFoundException(id));
         List<Task> tasks = taskRepository.findTasksByLabelId(id);
         if (!tasks.isEmpty()) {
-           throw new LabelHasTasksException(id);
-        } else
+            throw new LabelHasTasksException(id);
+        } else {
             labelRepository.delete(label);
-        return labelMapper.toDto(label);
+            return labelMapper.toDto(label);
+        }
     }
-
 }

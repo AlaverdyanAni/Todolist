@@ -22,9 +22,9 @@ public class TaskDtoIn {
     private String description;
 
     @Schema(name = "status", description = "Статус", example = "NEW")
-    @NotNull
-    //@ValueOfEnum(enumClass = Status.class, message = "Invalid Status")
-    private Status status;
+    @ValueOfEnum(enumClass = Status.class, message = "Invalid Status")
+    @NotBlank
+    private String status;
 
     @Schema(name = "userId", description = "Id пользователя", minimum = "1", example = "1")
     @NotNull

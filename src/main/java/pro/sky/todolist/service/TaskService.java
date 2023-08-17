@@ -14,7 +14,6 @@ import pro.sky.todolist.repository.TaskRepository;
 import pro.sky.todolist.repository.UserRepository;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -90,7 +89,7 @@ public class TaskService {
             return tasks
                     .stream()
                     .map(taskMapper::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Transactional(readOnly = true)
@@ -106,7 +105,7 @@ public class TaskService {
             return tasks
                 .stream()
                 .map(taskMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }
