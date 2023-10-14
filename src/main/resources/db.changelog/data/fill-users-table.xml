@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="fill-users-table.xml.1" author="ani">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="users"/>
+        </preConditions>
+
+        <insert tableName="users">
+            <column name="name">Ani</column>
+            <column name="email">ani-alaverdyan@mail.ru</column>
+        </insert>
+
+        <insert tableName="users">
+            <column name="name">Leo</column>
+            <column name="email">leo-alaverdyan@mail.ru</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
