@@ -55,11 +55,11 @@
 
   Используемые технологии
 
-  Java 11
-  Maven
-  Spring Boot
-  Liquibase
-  Postgresql
-  Mapstruct
-  Lombok
-  Springdoc
+  - Java 11
+  - Maven
+  - Spring Boot
+  - Liquibase
+  - Postgresql
+  - Mapstruct
+  - Lombok
+  - Springdoc
